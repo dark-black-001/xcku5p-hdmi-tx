@@ -195,7 +195,7 @@ module hdmi_gearbox #(
     //                                     ((READS_PER_CYCLE + 1) * 2) :
     //                                     ((OUT_W + IN_W - 1) / IN_W + 2);
     localparam integer WARM_UP_CYCLES = (IN_W >= OUT_W) ? 
-                                        32'd1 : OUT_W/IN_W+1;
+                                        32'd0 : OUT_W/IN_W+1;
 
     localparam integer TOTAL_RD_DELAY = RD_RST_DELAY + WARM_UP_CYCLES;
 
