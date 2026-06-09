@@ -1,3 +1,4 @@
+
 //--------------------------------------------------------------------------------
 // Module      : hdmi_tx_phy (修正版)
 // Description : HDMI TX PHY for XCKU5P
@@ -190,9 +191,12 @@ module hdmi_gearbox #(
     localparam integer OFFSET_W = $clog2(2*IN_W);  // bit_offset 位宽
 
     // 启动延迟：确保缓冲区有足够数据
+    // localparam integer WARM_UP_CYCLES = (IN_W >= OUT_W) ? 
+    //                                     ((READS_PER_CYCLE + 1) * 2) :
+    //                                     ((OUT_W + IN_W - 1) / IN_W + 2);
     localparam integer WARM_UP_CYCLES = (IN_W >= OUT_W) ? 
-                                        ((READS_PER_CYCLE + 1) * 2) :
-                                        ((OUT_W + IN_W - 1) / IN_W + 2);
+                                        32'd1 : OUT_W/IN_W+1;
+
     localparam integer TOTAL_RD_DELAY = RD_RST_DELAY + WARM_UP_CYCLES;
 
 
